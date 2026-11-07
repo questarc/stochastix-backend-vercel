@@ -1,0 +1,40 @@
+{
+  "sources": [
+    {
+      "name": "sales",
+      "type": "sales",
+      "enabled": true,
+      "accounts_file": "data/sales/accounts.csv",
+      "positions_file": "data/sales/positions.csv",
+      "models_file": "data/sales/model_portfolios.csv"
+    },
+    {
+      "name": "positions",
+      "type": "positions",
+      "enabled": true,
+      "accounts_file": "data/a360/accounts.csv",
+      "models_file": "data/sales/model_portfolios.csv",
+      "positions_files": {"A2001": "data/a360/positions.csv"},
+      "ticker_asset_class": {
+        "VXUS": "Intl Equity",
+        "BND": "US Bonds",
+        "SHV": "Cash",
+        "VNQ": "Real Estate"
+      },
+      "sec_type_asset_class": {
+        "Equity": "US Equity",
+        "Mutual Fund": "US Equity",
+        "ETF": "US Equity",
+        "Annuity": "US Bonds",
+        "Fixed Income": "US Bonds",
+        "Bond": "US Bonds",
+        "Cash": "Cash",
+        "Money Market": "Cash",
+        "REIT": "Real Estate"
+      },
+      "default_asset_class": "US Equity"
+    },
+    {"name": "a360", "type": "a360_api", "enabled": false, "base_url": ""},
+    {"name": "orion", "type": "orion_api", "enabled": false, "base_url": ""}
+  ]
+}

@@ -1,0 +1,13 @@
+.env*
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.vscode/
+.idea/
+tests/
+requirements-dev.txt
+README.md
+FEATURES.md
+Dockerfile
+.dockerignore

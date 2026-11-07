@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "python -m piper.download_voices --download-dir voices en_US-lessac-medium",
+  "functions": {
+    "app/main.py": {
+      "includeFiles": "{config/**,data/**,voices/**}",
+      "maxDuration": 300
+    }
+  }
+}

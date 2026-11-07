@@ -1,0 +1,39 @@
+{
+  "default_provider": "nvidia",
+  "temperature": 0.1,
+  "timeout_seconds": 120,
+  "max_trials_per_tool_call": 25000,
+  "providers": {
+    "nvidia": {
+      "label": "NVIDIA",
+      "default_model": "meta/llama-3.3-70b-instruct",
+      "models": ["meta/llama-3.3-70b-instruct"],
+      "api_key_env": "NVIDIA_API_KEY",
+      "model_provider": "openai",
+      "base_url": "https://integrate.api.nvidia.com/v1",
+      "package": "langchain_openai"
+    },
+    "ollama": {
+      "label": "Ollama (local)",
+      "default_model": "qwen2.5:7b",
+      "models": ["qwen2.5:7b"],
+      "base_url": "http://localhost:11434",
+      "api_key_env": null,
+      "package": "langchain_ollama"
+    },
+    "openai": {
+      "label": "OpenAI",
+      "default_model": "gpt-4o-mini",
+      "models": ["gpt-4o-mini"],
+      "api_key_env": "OPENAI_API_KEY",
+      "package": "langchain_openai"
+    },
+    "anthropic": {
+      "label": "Anthropic",
+      "default_model": "claude-sonnet-5",
+      "models": ["claude-sonnet-5", "claude-opus-5", "claude-haiku-5"],
+      "api_key_env": "ANTHROPIC_API_KEY",
+      "package": "langchain_anthropic"
+    }
+  }
+}

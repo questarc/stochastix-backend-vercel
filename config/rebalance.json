@@ -1,0 +1,12 @@
+{
+  "drift_tolerance": 0.02,
+  "min_trade_value": 500,
+  "whole_shares": true,
+  "default_securities": {
+    "US Equity": {"ticker": "VTI", "price": 300},
+    "Intl Equity": {"ticker": "VXUS", "price": 65},
+    "US Bonds": {"ticker": "BND", "price": 73},
+    "Cash": {"ticker": "SHV", "price": 110},
+    "Real Estate": {"ticker": "VNQ", "price": 90}
+  }
+}

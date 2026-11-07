@@ -1,0 +1,4 @@
+account_id,client_name,advisor,age,retirement_age,plan_end_age,annual_contribution,annual_withdrawal,risk_profile,model_id
+A1001,Jane Smith,Alex Morgan,52,65,95,20000,60000,Moderate,MOD-60-40
+A1002,Robert Chen,Alex Morgan,60,67,95,15000,70000,Conservative,CON-40-60
+A1003,Maria Garcia,Priya Patel,40,65,95,25000,80000,Aggressive,AGG-80-20

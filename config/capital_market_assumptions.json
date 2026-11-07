@@ -1,0 +1,32 @@
+{
+  "inflation": 0.025,
+  "asset_classes": ["US Equity", "Intl Equity", "US Bonds", "Cash", "Real Estate"],
+  "expected_return": {
+    "US Equity": 0.07,
+    "Intl Equity": 0.075,
+    "US Bonds": 0.04,
+    "Cash": 0.025,
+    "Real Estate": 0.06
+  },
+  "volatility": {
+    "US Equity": 0.16,
+    "Intl Equity": 0.18,
+    "US Bonds": 0.06,
+    "Cash": 0.01,
+    "Real Estate": 0.19
+  },
+  "correlation": [
+    [1.00, 0.80, 0.10, 0.00, 0.65],
+    [0.80, 1.00, 0.10, 0.00, 0.60],
+    [0.10, 0.10, 1.00, 0.20, 0.20],
+    [0.00, 0.00, 0.20, 1.00, 0.00],
+    [0.65, 0.60, 0.20, 0.00, 1.00]
+  ],
+  "distributions": {
+    "US Equity": "lognormal",
+    "Intl Equity": "lognormal",
+    "US Bonds": "lognormal",
+    "Cash": "lognormal",
+    "Real Estate": "lognormal"
+  }
+}

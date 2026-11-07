@@ -1,0 +1,14 @@
+account_id,ticker,asset_class,quantity,price
+A1001,VTI,US Equity,2000,300
+A1001,VXUS,Intl Equity,3000,65
+A1001,BND,US Bonds,2500,73
+A1001,SHV,Cash,400,110
+A1001,VNQ,Real Estate,500,90
+A1002,VTI,US Equity,1000,300
+A1002,VXUS,Intl Equity,1500,65
+A1002,BND,US Bonds,7000,73
+A1002,SHV,Cash,800,110
+A1003,VTI,US Equity,800,300
+A1003,VXUS,Intl Equity,1500,65
+A1003,BND,US Bonds,1500,73
+A1003,VNQ,Real Estate,300,90

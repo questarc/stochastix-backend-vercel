@@ -1,0 +1,7 @@
+Account Number,Description,Ticker,Cusip,Sec Type,Qty,Custodian Quantity,PM Price,Market Value
+A2001,Vanguard Total Stock Market ETF,VTI,922908769,ETF,1500,1500,$300.00,"$450,000.00"
+A2001,Vanguard Total Intl Stock ETF,VXUS,921909768,ETF,2000,2000,$65.00,"$130,000.00"
+A2001,Vanguard Total Bond Market ETF,BND,921937835,ETF,3000,3000,$73.00,"$219,000.00"
+A2001,iShares Short Treasury Bond ETF,SHV,464288679,ETF,,300,$110.00,"$33,000.00"
+A2001,Fixed Indexed Annuity,,12345A678,Annuity,1,1,,"$120,000.00"
+,,,,,,,,

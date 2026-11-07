@@ -1,0 +1,24 @@
+{
+  "news_ttl_minutes": 15,
+  "calendar_ttl_minutes": 360,
+  "request_timeout_seconds": 10,
+  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36",
+  "max_items": 30,
+  "news_feeds": [
+    {"name": "Federal Reserve", "url": "https://www.federalreserve.gov/feeds/press_all.xml", "category": "Monetary policy"},
+    {"name": "Federal Reserve speeches", "url": "https://www.federalreserve.gov/feeds/speeches.xml", "category": "Monetary policy"},
+    {"name": "BEA", "url": "https://apps.bea.gov/rss/rss.xml", "category": "Economic data"},
+    {"name": "SEC", "url": "https://www.sec.gov/news/pressreleases.rss", "category": "Regulation"},
+    {"name": "ECB", "url": "https://www.ecb.europa.eu/rss/press.html", "category": "Global central banks"},
+    {"name": "MarketWatch", "url": "https://feeds.content.dowjones.io/public/rss/mw_topstories", "category": "Markets"}
+  ],
+  "earnings_url": "https://api.nasdaq.com/api/calendar/earnings?date={date}",
+  "dividends_url": "https://api.nasdaq.com/api/calendar/dividends?date={date}",
+  "splits_url": "https://api.nasdaq.com/api/calendar/splits",
+  "earnings_min_market_cap": 50000000000,
+  "heatmap_url": "https://api.nasdaq.com/api/screener/stocks?tableonly=true&limit=25&offset=0&download=true",
+  "heatmap_size": 100,
+  "heatmap_ttl_minutes": 15,
+  "heatmap_exclude": ["GOOG", "BRK/A", "FOX", "NWS"],
+  "watchlist": ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "TSLA", "AVGO", "JPM", "V", "UNH", "XOM", "JNJ", "WMT", "PG"]
+}

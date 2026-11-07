@@ -1,0 +1,16 @@
+model_id,model_name,asset_class,weight
+MOD-60-40,Moderate 60/40,US Equity,0.40
+MOD-60-40,Moderate 60/40,Intl Equity,0.15
+MOD-60-40,Moderate 60/40,US Bonds,0.35
+MOD-60-40,Moderate 60/40,Cash,0.05
+MOD-60-40,Moderate 60/40,Real Estate,0.05
+CON-40-60,Conservative 40/60,US Equity,0.25
+CON-40-60,Conservative 40/60,Intl Equity,0.10
+CON-40-60,Conservative 40/60,US Bonds,0.50
+CON-40-60,Conservative 40/60,Cash,0.10
+CON-40-60,Conservative 40/60,Real Estate,0.05
+AGG-80-20,Aggressive 80/20,US Equity,0.50
+AGG-80-20,Aggressive 80/20,Intl Equity,0.25
+AGG-80-20,Aggressive 80/20,US Bonds,0.15
+AGG-80-20,Aggressive 80/20,Cash,0.02
+AGG-80-20,Aggressive 80/20,Real Estate,0.08
