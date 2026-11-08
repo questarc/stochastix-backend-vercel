@@ -6,8 +6,8 @@
   "providers": {
     "nvidia": {
       "label": "NVIDIA",
-      "default_model": "meta/llama-3.3-70b-instruct",
-      "models": ["meta/llama-3.3-70b-instruct"],
+      "default_model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+      "models": ["nvidia/nemotron-3.5-lightning-30b-a3b"],
       "api_key_env": "NVIDIA_API_KEY",
       "model_provider": "openai",
       "base_url": "https://integrate.api.nvidia.com/v1",

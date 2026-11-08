@@ -108,6 +108,8 @@ def test_llm_providers_never_return_keys(client, monkeypatch):
     body = client.get("/api/llm/providers").json()
     assert body[0]["id"] == "nvidia"
     nvidia = next(p for p in body if p["id"] == "nvidia")
+    assert nvidia["default_model"] == "nvidia/nemotron-3.5-lightning-30b-a3b"
+    assert nvidia["models"] == ["nvidia/nemotron-3.5-lightning-30b-a3b"]
     assert nvidia["api_key_set"] is True and "nvidia-test-value" not in str(body)
     anthropic = next(p for p in body if p["id"] == "anthropic")
     assert anthropic["api_key_set"] is True and "test-value" not in str(body)
@@ -128,7 +130,7 @@ def test_nvidia_provider_uses_openai_compatible_endpoint(monkeypatch):
 
     build_chat_model(settings, "nvidia")
 
-    assert calls["model"] == "meta/llama-3.3-70b-instruct"
+    assert calls["model"] == "nvidia/nemotron-3.5-lightning-30b-a3b"
     assert calls["model_provider"] == "openai"
     assert calls["base_url"] == "https://integrate.api.nvidia.com/v1"
     assert calls["api_key"] == "nvidia-test-value"

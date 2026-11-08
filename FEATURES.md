@@ -15,7 +15,7 @@ Results are projections, not guarantees, and not investment advice.
 | ⚖️ Rebalance | Drift vs the model portfolio, proposed sells/buys funded by sells, success before/after | `POST /api/rebalance/proposal`, `GET /api/rebalance/settings` |
 | 🧾 Orders | Pending order blotter, CSV/JSON export | `POST /api/orders/generate`, `GET/DELETE /api/orders`, `GET /api/orders/export` |
 | 📂 Source agents | Sales CSV, A360 Positions (with upload), A360/Orion API placeholders | `/api/sources/...`, `GET /api/accounts/{id}/portfolio` |
-| 🤖 Advisor AI | LangChain + LangGraph agent with 15 tools; NVIDIA (default), Ollama, OpenAI, Anthropic | `POST /api/chat`, `DELETE /api/chat/{thread_id}`, `GET /api/llm/providers` |
+| 🤖 Advisor AI | LangChain + LangGraph agent with 15 tools; NVIDIA Nemotron (default), Ollama, OpenAI, Anthropic | `POST /api/chat`, `DELETE /api/chat/{thread_id}`, `GET /api/llm/providers` |
 | 🌐 WebLLM support | Exposes the same tools to an agent running in the browser | `GET /api/agent/tools`, `POST /api/agent/tools/{name}` |
 | 🔊 VoiceGenAgent | Audio summary (WAV) of an AI answer for the investor, local Piper TTS | `POST /api/voice`, `GET /api/voice/{id}` |
 | 📰 MarketAnalyzerAgent | Latest economic and market news | `GET /api/market/news` |
@@ -62,7 +62,7 @@ Interactive API docs: `http://localhost:8000/docs` (port 8001 when `BACKEND_PORT
   `compare_current_vs_model`, `propose_rebalance`, `simulate_and_rebalance` (creates pending orders),
   `explain_methodology`, `get_capital_market_assumptions`, `create_audio_summary`,
   `get_market_news`, `get_upcoming_earnings`, `get_corporate_actions`, `get_market_heatmap`.
-- Providers (`app/llm.py`): NVIDIA (default `meta/llama-3.3-70b-instruct`), Ollama (`qwen2.5:7b`), OpenAI, Anthropic.
+- Providers (`app/llm.py`): NVIDIA (default `nvidia/nemotron-3.5-lightning-30b-a3b`), Ollama (`qwen2.5:7b`), OpenAI, Anthropic.
   NVIDIA uses the OpenAI-compatible NVIDIA API endpoint. Keys only from environment / `.env`;
   `/api/llm/providers` returns `api_key_set`, never the key.
 
