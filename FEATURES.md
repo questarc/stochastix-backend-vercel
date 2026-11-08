@@ -17,7 +17,7 @@ Results are projections, not guarantees, and not investment advice.
 | 📂 Source agents | Sales CSV, A360 Positions (with upload), A360/Orion API placeholders | `/api/sources/...`, `GET /api/accounts/{id}/portfolio` |
 | 🤖 Advisor AI | LangChain + LangGraph agent with 15 tools; NVIDIA Nemotron (default), Ollama, OpenAI, Anthropic | `POST /api/chat`, `DELETE /api/chat/{thread_id}`, `GET /api/llm/providers` |
 | 🌐 WebLLM support | Exposes the same tools to an agent running in the browser | `GET /api/agent/tools`, `POST /api/agent/tools/{name}` |
-| 🔊 VoiceGenAgent | Audio summary (WAV) of an AI answer for the investor, local Piper TTS | `POST /api/voice`, `GET /api/voice/{id}` |
+| 🔊 VoiceGenAgent | Available in Python development only; Piper TTS is omitted from Docker and Vercel deployments | `POST /api/voice`, `GET /api/voice/{id}` |
 | 📰 MarketAnalyzerAgent | Latest economic and market news | `GET /api/market/news` |
 | 📈 EarningsAgent | Upcoming earnings reports | `GET /api/market/earnings` |
 | 🏦 CorporateActionsAgent | Upcoming dividends and stock splits | `GET /api/market/corporate-actions` |
@@ -70,7 +70,7 @@ Interactive API docs: `http://localhost:8000/docs` (port 8001 when `BACKEND_PORT
 - Rule-based script: strips markdown/tables, rewords figures for speech ("76.8%" → "76.8 percent",
   "$1,380,575" → "1,380,575 dollars") **without changing values**, adds opening and advisor name, and always ends with
   the fixed disclaimer.
-- Piper TTS (`en_US-lessac-medium`, free, offline; text never leaves the server). Voice downloaded in the Docker build.
+- Piper TTS (`en_US-lessac-medium`, free, offline; text never leaves the server). Available in local development through `requirements-dev.txt`; excluded from Docker and Vercel.
 - Newest 50 clips kept in memory; file name `{account}_summary_{timestamp}.wav`.
 
 ## Market agents (`app/market/`, `config/market.json`)

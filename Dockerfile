@@ -2,14 +2,12 @@ FROM python:3.12-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    OLLAMA_BASE_URL=http://host.docker.internal:11434 \
-    MCAPP_VOICE=en_US-lessac-medium
+    OLLAMA_BASE_URL=http://host.docker.internal:11434
 
 WORKDIR /srv
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-RUN python -m piper.download_voices --download-dir voices ${MCAPP_VOICE}
 
 COPY app ./app
 COPY config ./config
