@@ -100,7 +100,7 @@ Interactive API docs: `http://localhost:8000/docs` (port 8001 when `BACKEND_PORT
 - Downloads daily Open, High, Low, Close and Volume values from Yahoo Finance for the latest 30 calendar days. At least 12 complete observations are required; the model is trained for each request and no history or model state is retained.
 - A CPU PyTorch LSTM recursively estimates the next five daily percentage changes and directional labels (`up` / `down`). The response includes expected prices, forecast dates, recent closes and the observation count.
 - The entered price anchors the expected-price sequence; historical closes are rescaled to meet that anchor on the chart. The model uses a short sample and its estimates are experimental, not investment advice or validated trading signals.
-- PyTorch adds a large runtime dependency. Verify the hosting provider's serverless function bundle limits before deploying; the Docker backend is the supported path if the PyTorch runtime does not fit the Vercel function limit.
+- PyTorch and yfinance are isolated in `requirements-predictive-pricing.txt` and installed by Docker, not in the Vercel function bundle. To enable Vercel forecasts, set `PREDICTIVE_PRICING_API_URL` to a separately hosted Docker backend or compatible pricing service; without that setting, this endpoint returns HTTP 503 on deployments that omit the optional dependencies.
 
 ## E*TRADE PDF reader (`app/etrade.py`)
 - Upload a text-based PDF up to 20 MB and 500 pages; extracted text is limited to 2 million characters.
@@ -139,7 +139,8 @@ Interactive API docs: `http://localhost:8000/docs` (port 8001 when `BACKEND_PORT
 | `config/sources.json` | Enabled source agents and file paths |
 | `config/llm.json` | Providers, models, temperature, timeout, max trials per tool call |
 | `config/market.json` | News feeds, calendar URLs, watchlist, cache times |
-| `requirements.txt` | Includes PyTorch for the LSTM agent and yfinance for daily market history |
+| `requirements.txt` | Core backend dependencies, excluding the optional LSTM runtime |
+| `requirements-predictive-pricing.txt` | Optional CPU-only PyTorch and yfinance dependencies for Docker/local pricing inference |
 | `OPENAI_API_KEY`, `ANTHROPIC_API_KEY` | LLM keys (`.env`, git- and docker-ignored) |
 | `OLLAMA_BASE_URL`, `MCAPP_LLM_PROVIDER`, `MCAPP_LLM_MODEL` | LLM overrides |
 | `MCAPP_VOICE`, `MCAPP_VOICES_DIR` | Piper voice |

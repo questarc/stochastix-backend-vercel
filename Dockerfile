@@ -6,8 +6,8 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /srv
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+COPY requirements.txt requirements-predictive-pricing.txt ./
+RUN pip install --no-cache-dir -r requirements-predictive-pricing.txt
 
 COPY app ./app
 COPY config ./config
