@@ -7,18 +7,21 @@ from fastapi import APIRouter, HTTPException
 from fastapi.concurrency import run_in_threadpool
 from pydantic import BaseModel, Field
 
-from ..predictive_pricing import predict_stock_price
+from ..predictive_pricing import predict_stock_list, predict_stock_price
 
 router = APIRouter(prefix="/predictive-pricing", tags=["Predictive Pricing Agent"])
 
 
 class PredictionRequest(BaseModel):
-    symbol: str = Field(min_length=1, max_length=15)
-    current_price: float = Field(gt=0, allow_inf_nan=False)
+    symbol: str = Field(min_length=1, max_length=100)
 
 
-async def _predict_from_upstream(base_url: str, payload: dict) -> dict:
-    endpoint = f"{base_url.rstrip('/')}/api/predictive-pricing/predict"
+class StockListRequest(BaseModel):
+    symbols: list[str] = Field(min_length=1, max_length=10)
+
+
+async def _predict_from_upstream(base_url: str, payload: dict, endpoint: str = "/predict") -> dict:
+    endpoint = f"{base_url.rstrip('/')}/api/predictive-pricing{endpoint}"
     try:
         async with httpx.AsyncClient(timeout=280.0) as client:
             response = await client.post(endpoint, json=payload)
@@ -37,14 +40,9 @@ async def _predict_from_upstream(base_url: str, payload: dict) -> dict:
     return result
 
 
-@router.post("/predict")
-async def predict(request: PredictionRequest):
-    upstream_url = os.getenv("PREDICTIVE_PRICING_API_URL", "").strip()
-    if upstream_url:
-        return await _predict_from_upstream(upstream_url, request.model_dump())
-
+async def _run_local(predictor, *args):
     try:
-        return await run_in_threadpool(predict_stock_price, request.symbol, request.current_price)
+        return await run_in_threadpool(predictor, *args)
     except ModuleNotFoundError as exc:
         if exc.name in {"torch", "yfinance"}:
             raise HTTPException(
@@ -52,3 +50,19 @@ async def predict(request: PredictionRequest):
                 detail="Predictive Pricing is not installed here. Configure PREDICTIVE_PRICING_API_URL to a pricing backend.",
             ) from exc
         raise
+
+
+@router.post("/predict")
+async def predict(request: PredictionRequest):
+    upstream_url = os.getenv("PREDICTIVE_PRICING_API_URL", "").strip()
+    if upstream_url:
+        return await _predict_from_upstream(upstream_url, {"symbol": request.symbol})
+    return await _run_local(predict_stock_price, request.symbol)
+
+
+@router.post("/batch")
+async def predict_batch(request: StockListRequest):
+    upstream_url = os.getenv("PREDICTIVE_PRICING_API_URL", "").strip()
+    if upstream_url:
+        return await _predict_from_upstream(upstream_url, request.model_dump(), endpoint="/batch")
+    return await _run_local(predict_stock_list, request.symbols)
