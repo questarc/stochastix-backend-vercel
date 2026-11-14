@@ -23,6 +23,7 @@ Results are projections, not guarantees, and not investment advice.
 | 🏦 CorporateActionsAgent | Upcoming dividends and stock splits | `GET /api/market/corporate-actions` |
 | 🗺️ MarketHeatmapAgent | Daily % change of the largest US companies by sector (treemap data) | `GET /api/market/heatmap?size=100` |
 | 📉 Time Series & Statistical Models | User-uploaded time series analyzed with forward-return linear regression or up-probability logistic regression | `POST /api/time-series/preview`, `POST /api/time-series/analyze` |
+| 🔮 Predictive Pricing Agent | PyTorch LSTM trained on recent Yahoo Finance OHLCV data; five daily direction, percent-change and expected-price estimates | `POST /api/predictive-pricing/predict` |
 | 📖 Methodology | "How it works" text | `GET /api/methodology` |
 | ⚙️ Config | Capital market assumptions and allowed options | `GET /api/config/cma`, `GET /api/config/options` |
 
@@ -94,6 +95,13 @@ Interactive API docs: `http://localhost:8000/docs` (port 8001 when `BACKEND_PORT
   accuracy, precision, recall, ROC AUC, log loss, confusion counts, and odds ratios. No uploaded observations are
   retained. Associations are not causal estimates, and a holdout is not a validated trading strategy.
 
+## Predictive Pricing Agent (`app/predictive_pricing.py`)
+- `POST /api/predictive-pricing/predict` accepts a stock ticker and a positive user-entered current price.
+- Downloads daily Open, High, Low, Close and Volume values from Yahoo Finance for the latest 30 calendar days. At least 12 complete observations are required; the model is trained for each request and no history or model state is retained.
+- A CPU PyTorch LSTM recursively estimates the next five daily percentage changes and directional labels (`up` / `down`). The response includes expected prices, forecast dates, recent closes and the observation count.
+- The entered price anchors the expected-price sequence; historical closes are rescaled to meet that anchor on the chart. The model uses a short sample and its estimates are experimental, not investment advice or validated trading signals.
+- PyTorch adds a large runtime dependency. Verify the hosting provider's serverless function bundle limits before deploying; the Docker backend is the supported path if the PyTorch runtime does not fit the Vercel function limit.
+
 ## E*TRADE PDF reader (`app/etrade.py`)
 - Upload a text-based PDF up to 20 MB and 500 pages; extracted text is limited to 2 million characters.
 - The PDF and unredacted extracted text are processed transiently in memory and never written to disk or a database.
@@ -131,6 +139,7 @@ Interactive API docs: `http://localhost:8000/docs` (port 8001 when `BACKEND_PORT
 | `config/sources.json` | Enabled source agents and file paths |
 | `config/llm.json` | Providers, models, temperature, timeout, max trials per tool call |
 | `config/market.json` | News feeds, calendar URLs, watchlist, cache times |
+| `requirements.txt` | Includes PyTorch for the LSTM agent and yfinance for daily market history |
 | `OPENAI_API_KEY`, `ANTHROPIC_API_KEY` | LLM keys (`.env`, git- and docker-ignored) |
 | `OLLAMA_BASE_URL`, `MCAPP_LLM_PROVIDER`, `MCAPP_LLM_MODEL` | LLM overrides |
 | `MCAPP_VOICE`, `MCAPP_VOICES_DIR` | Piper voice |

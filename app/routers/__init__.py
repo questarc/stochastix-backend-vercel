@@ -1,5 +1,5 @@
-from . import (agent_tools, chat, etrade, fidelity, llm, market, methodology, orders, portfolio, rebalance, simulations, sources,
-               time_series, voice)
+from . import (agent_tools, chat, etrade, fidelity, llm, market, methodology, orders, portfolio, predictive_pricing,
+               rebalance, simulations, sources, time_series, voice)
 
 ALL_ROUTERS = [
     sources.router,
@@ -16,4 +16,5 @@ ALL_ROUTERS = [
     etrade.router,
     fidelity.router,
     time_series.router,
+    predictive_pricing.router,
 ]
